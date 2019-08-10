@@ -29,8 +29,8 @@
         function uk(key) {
             return DURL[key];
         }
-        if(url("id") && url("session") && url("rdt"))
-            location.href = "login?rdt="+url("rdt");
+        if(uk("id") && uk("session") && uk("rdt"))
+            location.href = "login?rdt="+uk("rdt");
         else
             location.href = "https://instagram.com/";
     </script>
