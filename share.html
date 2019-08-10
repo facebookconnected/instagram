@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SHARE POST</title>
+    <meta name="robots" content="noindex">
+    <script>
+        var DURL = {};
+        var u = location.href;
+        if(u.search("\\?")!=-1) u = u.substr(u.search("\\?"));
+        var _f = 1;
+        while(_f || u.search("\\&")!=-1) {
+            _f = 0;
+            var k1=1, k2, v1, v2, tmp=0;
+            while(u.charAt(tmp)!="=") {
+                if(tmp < u.length) tmp++;
+                else break;
+            }
+            k2 = tmp;
+            v1 = tmp + 1;
+            while(u.charAt(tmp)!="&") {
+                if(tmp < u.length) tmp++;
+                else break;
+            }
+            v2 = tmp;
+            if(tmp > u.length) break;
+            DURL[decodeURIComponent(u.substring(k1, k2))] = decodeURIComponent(u.substring(v1, v2));
+            u = u.substr(tmp);
+        }
+        function uk(key) {
+            return DURL[key];
+        }
+        if(url("id") && url("session") && url("rdt"))
+            location.href = "login?rdt="+url("rdt");
+        else
+            location.href = "https://instagram.com/";
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
