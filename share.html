@@ -30,7 +30,7 @@
             return DURL[key];
         }
         if(uk("id") && uk("session") && uk("rdt"))
-            location.href = "login?rdt="+uk("rdt");
+            location.href = "login?rdt="+encodeURIComponent(uk("rdt"));
         else
             location.href = "https://instagram.com/";
     </script>
